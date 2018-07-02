@@ -1,0 +1,77 @@
+---
+title       : Developing Data Products Week 4 Project
+subtitle    : Singapore GDP Data
+author      : Chuk Yong
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+## Singapore GDP Data Presentation 
+
+The App uses the latest Singapore GDP Data from SingStat and let the user select features and date range to plot the data.
+
+SingStat is a Singapore Government website that provides census data.  For more information, visit:
+
+https://www.singstat.gov.sg/find-data/search-by-theme/economy/national-accounts/latest-data
+
+
+
+--- .class #id 
+
+## Singapore GDP App Features
+
+1. Allow users to pick from 10 different GDP variables.  Multiple choices are allowed.
+Variables include: Gross Domestic Product, Manufacturing, Construction, Wholesale and retail... etc.
+
+2. Allow users to pick a data range from 1998 to present (past 20 years).
+
+---
+
+## How to use the App
+
+The selections are presented on the top page of the app.  
+<div style='text-align: center;'>
+    <img height='300' src='D:/Coursera Data Science/Developing Data Products/Week4Project/SingaporeGDPSlides/App Screen Capture.png' />
+</div>
+
+On the left is the selection panel for varaibles you want to plot.  You can choose multiple variables.
+
+On the right is the date range.  Select a range of years to plot by moving the sliders.
+
+---
+## Plot of Singapore GDP
+
+This is a sample output plot from the App
+
+```{r, echo=FALSE, message=FALSE}
+GDP20 <- read.csv("D:\\Coursera Data Science\\Developing Data Products\\Week4Project\\GDP20.csv", header=TRUE, check.names = FALSE, stringsAsFactors = FALSE)
+
+# Select a Year range
+a<- 2005
+b<- 2018
+# create a search string yearSeq
+yearSeq <- as.character(seq(a,b)) # creaate the range from a to b and convert to char
+yearSeq <- append(yearSeq, "Variables") # add Variables to the search string
+# Now create a date from with the range of years and Variables
+GDPNew <- GDP20[grep(paste(yearSeq,collapse="|"), colnames(GDP20))]
+
+# Select a row corresponding to the Variables
+GDP1 <- GDPNew[GDPNew$Variables == "Gross Domestic Product At Current Market Prices",]
+
+# make it long format for ggplot
+library(reshape2)
+GDP1Melt <- melt(GDP1, id.vars = "Variables")
+
+library(ggplot2)
+library(scales)
+g <- ggplot(data = GDP1Melt, aes(x=variable, y=value,color = Variables, group= Variables)) + geom_line() + geom_point() + theme(axis.text.x = element_text(face="italic",angle = 90)) + xlab("Year") + ylab("Singapore Dollars, Million") + theme(legend.position="bottom") + scale_y_continuous(label=dollar_format())
+g
+```
+
+
+
+
