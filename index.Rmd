@@ -9,6 +9,9 @@ hitheme     : tomorrow      #
 widgets     : []            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 knit        : slidify::knit2slides
+github      :
+  user: Chuk Yong
+  repo: Developing-Data-Products-Week-4-Project
 ---
 ## Singapore GDP Data Presentation 
 
@@ -48,7 +51,7 @@ On the right is the date range.  Select a range of years to plot by moving the s
 This is a sample output plot from the App
 
 ```{r, echo=FALSE, message=FALSE}
-GDP20 <- read.csv("D:\\Coursera Data Science\\Developing Data Products\\Week4Project\\GDP20.csv", header=TRUE, check.names = FALSE, stringsAsFactors = FALSE)
+GDP20 <- read.csv("D:\\Coursera Data Science\\Developing Data Products\\Week4Project\\SingaporeGDPSlides\\GDP20.csv", header=TRUE, check.names = FALSE, stringsAsFactors = FALSE)
 
 # Select a Year range
 a<- 2005
