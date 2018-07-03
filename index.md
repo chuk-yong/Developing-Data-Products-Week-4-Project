@@ -37,8 +37,9 @@ Variables include: Gross Domestic Product, Manufacturing, Construction, Wholesal
 ## How to use the App
 
 The selections are presented on the top page of the app.  
+
 <div style='text-align: center;'>
-    <img height='300' src='D:/Coursera Data Science/Developing Data Products/Week4Project/SingaporeGDPSlides/App Screen Capture.png' />
+    <img height='300' src='App-Screen-Capture.PNG' />
 </div>
 
 On the left is the selection panel for varaibles you want to plot.  You can choose multiple variables.
